@@ -1,0 +1,47 @@
+@model TodoModel
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Edit Todo</h2>
+    <form asp-action="UpdateTodo" method="post" class="needs-validation" novalidate>
+        <input type="hidden" asp-for="Id" />
+        
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label">Title</label>
+            <input asp-for="Title" class="form-control" type="text" placeholder="Enter todo title" required>
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Description</label>
+            <textarea asp-for="Description" class="form-control" placeholder="Enter todo description" rows="3"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-dark btn-lg">Update</button>
+        </div>
+    </form>
+</div>
+
+<!-- Add Bootstrap Validation Script -->
+@section Scripts {
+    <script>
+        (function () {
+            'use strict'
+
+            // Fetch all forms with the .needs-validation class
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission if invalid
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+}
